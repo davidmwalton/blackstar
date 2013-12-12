@@ -1,0 +1,31 @@
+#the-map {
+	position: fixed;
+}
+
+.tile {
+	float: left;
+	width: 48px;
+	height: 48px;
+}
+
+.snow-tile {
+	background-image: url(../images/snow-tile.png);
+}
+.grass-tile {
+	background-image: url(../images/grass-tile.png);
+}
+
+.character {
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+}
+
+.shaekasha-character {
+	background-image: url(../images/shaekasha.png);
+}
+
+.sorceress-character {
+	background-image: url(../images/sorceress.png);
+}
