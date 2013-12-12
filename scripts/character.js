@@ -12,12 +12,6 @@ function Character(settings) {
 	sprites.walking = settings.walkingSprite || new Sprite({});
 
 	baseCharacterClass = settings.baseCharacterClass || 'shaekasha-character';
-	// rotators = {};
-	// rotators.idle = false;
-	// rotators.walking = false;
-	// frames = {};
-	// frames.idle = 0;
-	// frames.walking = 0;
 	verticalMoveDistance = settings.verticalMoveDistance || 2;
 	verticalMoveInterval = settings.verticalMoveInterval || 28;
 	horizontalMoveDistance = settings.horizontalMoveDistance || 2;
