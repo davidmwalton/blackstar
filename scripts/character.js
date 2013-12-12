@@ -4,7 +4,7 @@ function Character(settings) {
 		rotators, frames, baseCharacterClass,
 		$character, horizontalMoveDistance, verticalMoveDistance, horizontalMoveInterval, 
 		verticalMoveInterval, moving, moveKey, movementTimeout, direction,
-		id, currentFrame, self, sprites;
+		id, currentFrame, self, sprites, keysDown;
 
 
 	sprites = {};
@@ -20,6 +20,7 @@ function Character(settings) {
 	moveKey = 0;
 	direction = 'down';
 	id = util.getNewGuid();
+	keysDown = [];
 	self = this;
 
 	function getCharacterElement() {
@@ -75,12 +76,13 @@ function Character(settings) {
 
 	function handleKeydown(event) {
 		var newValue, position;
-
+		console.log('keydown: ' + event.keyCode);
 		switch (event.keyCode) {
 			case 38: // up
 			case 39: // right
 			case 37: // left
 			case 40: // down
+				keysDown[event.keyCode] = true;
 				if (moving) {
 					moveKey = event.keyCode;
 					return;
@@ -88,7 +90,7 @@ function Character(settings) {
 
 				stopIdle();
 
-				rotators.walking = true;
+				sprites.walking.active = true;
 				// window.setTimeout(rotateBackground.bind(this, walkingFrame, 'walking', walkingSprite), walkingSprite.interval);
 
 				moving = true;
@@ -163,7 +165,7 @@ function Character(settings) {
 
 		stopIdle();
 
-		rotators.walking = true;
+		sprites.walking.active = true;
 		// window.setTimeout(rotateBackground.bind(this, walkingFrame, 'walking', walkingSprite), walkingSprite.interval);
 
 		moving = true;
@@ -183,15 +185,55 @@ function Character(settings) {
 	}
 
 	function handleKeyup(event) {
+		var onlyKeyDown;
+		console.log('keyup: ' + event.keyCode);
+		keysDown[event.keyCode] = false;
+
+		if (hasKeyDown()) {
+			onlyKeyDown = getOnlyKeyDown();
+			if (onlyKeyDown > 0) {
+				moveKey = onlyKeyDown;
+			}
+
+			return;
+		}
+
 		moving = false;
-		rotators.walking = false;
+		sprites.walking.active = false;
 		idle();
 	}
 
+	function hasKeyDown() {
+		console.log('keysDown[37]: ' + keysDown[37]);
+		console.log('keysDown[38]: ' + keysDown[38]);
+		console.log('keysDown[39]: ' + keysDown[39]);
+		console.log('keysDown[40]: ' + keysDown[40]);
+		return keysDown[37] || keysDown[38] || keysDown[39] || keysDown[40];
+	}
+
+	function getOnlyKeyDown() {
+		var i, count = 0, key;
+		for (i = 37; i < 41; i += 1) {
+			if (keysDown[i]) {
+				count += 1;
+				key = i;
+			}
+		}
+
+		if (count == 1) {
+			return key;
+		}
+
+		return -1;
+	}
 
 	function onLoop() {
 		if (sprites.idle.active) {
 			rotateBackground(sprites.idle);
+		}
+		if (sprites.walking.active) {
+			move();
+			rotateBackground(sprites.walking)
 		}
 	}
 

@@ -80,7 +80,7 @@ var sorceress = new Character({
 		height: 75,
 		spriteWidth: 48,
 		spriteCount: 8,
-		interval: 80,
+		interval: 6,
 		spriteTop: {
 			down: 13,
 			up: 612,
