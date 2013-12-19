@@ -22,7 +22,7 @@ function Sprite(settings) {
 	this.height = settings.height || 54;
 	this.spriteWidth = settings.spriteWidth || 30;
 	this.spriteCount = settings.spriteCount || 8;
-	this.interval = settings.interval || 2;
+	this.interval = settings.interval || 8;
 	this.spriteTop = getSpriteTop(settings);
 	this.spriteLeft = settings.spriteLeft || 0;
 

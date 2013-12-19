@@ -96,8 +96,6 @@ var sorceress = new Character({
 	horizontalMoveInterval: 22
 });
 
-// map.addCharacter(shakaesha);
-// shakaesha.init();
 // shakaesha.moveTo({ top: 100, left: 100 });
 // map.addCharacter(shakaesha2);
 // shakaesha2.init();
@@ -105,3 +103,6 @@ var sorceress = new Character({
 map.init();
 map.addCharacter(sorceress);
 sorceress.init();
+map.addCharacter(shakaesha);
+shakaesha.init();
+shakaesha.moveTo({ top: 100, left: 100 });
